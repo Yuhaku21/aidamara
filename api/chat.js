@@ -6,8 +6,11 @@ let companyInfo = null;
 function loadCompanyInfo() {
   if (companyInfo) return companyInfo;
 
-  const filePath = path.join(process.cwd(), "data", "company-info.json");
-  const raw = fs.readFileSync(filePath, "utf8");
+  const raw = fs.readFileSync(
+    path.join(process.cwd(), "data", "company-info.json"),
+    "utf8"
+  );
+
   companyInfo = JSON.parse(raw);
 
   return companyInfo;
@@ -20,19 +23,19 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
 
   if (!apiKey) {
     return res.status(500).json({
-      error: "Environment Variable GEMINI_API_KEY belum diset di Vercel.",
+      error: "GROQ_API_KEY belum diset di Vercel.",
     });
   }
 
   const { messages } = req.body;
 
-  if (!Array.isArray(messages) || messages.length === 0) {
+  if (!Array.isArray(messages)) {
     return res.status(400).json({
-      error: "Pesan tidak valid.",
+      error: "Messages tidak valid.",
     });
   }
 
@@ -40,69 +43,47 @@ module.exports = async function handler(req, res) {
     const info = loadCompanyInfo();
 
     const systemPrompt = `
-Kamu adalah AI Customer Service.
+Kamu adalah AI Customer Service Aidamara.
 
 Jawablah HANYA berdasarkan data perusahaan berikut.
 
-Jika informasi tidak ada di data, katakan dengan jujur bahwa kamu tidak menemukannya dan jangan mengarang.
-
-DATA PERUSAHAAN:
+Jika jawabannya tidak ada di data, katakan dengan jujur bahwa kamu tidak memiliki informasinya.
 
 ${JSON.stringify(info, null, 2)}
 `;
 
-    const contents = messages.map((msg) => ({
-      role: msg.role === "assistant" ? "model" : "user",
-      parts: [
-        {
-          text: msg.content,
-        },
-      ],
-    }));
-
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+      "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
-          "X-goog-api-key": apiKey,
         },
         body: JSON.stringify({
-          systemInstruction: {
-            parts: [
-              {
-                text: systemPrompt,
-              },
-            ],
-          },
-          contents,
+          model: "llama-3.3-70b-versatile",
+          messages: [
+            {
+              role: "system",
+              content: systemPrompt,
+            },
+            ...messages,
+          ],
+          temperature: 0.2,
         }),
       }
     );
 
     const data = await response.json();
 
-    console.log(JSON.stringify(data, null, 2));
-
     if (!response.ok) {
-      return res.status(response.status).json({
-        error:
-          data.error?.message ||
-          "Terjadi kesalahan saat memanggil Gemini API.",
-      });
+      return res.status(response.status).json(data);
     }
 
-    const reply =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ??
-      "Maaf, saya tidak dapat memberikan jawaban.";
-
     return res.status(200).json({
-      reply,
+      reply: data.choices[0].message.content,
     });
   } catch (err) {
-    console.error(err);
-
     return res.status(500).json({
       error: err.message,
     });
