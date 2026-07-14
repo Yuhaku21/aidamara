@@ -1,32 +1,109 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Chat</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Chat</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-  <main class="app">
+
+<div class="app">
+
     <header class="header">
-      <h1>AI Chat</h1>
+
+        <div class="ai-logo">
+            🤖
+        </div>
+
+        <div>
+            <h1>AI Assistant</h1>
+            <span>Online • Powered by AI</span>
+        </div>
+
     </header>
 
+
     <div id="chatBox" class="chat-box">
-      <p id="emptyState" class="empty-state">Mulai percakapan dengan mengetik pesan di bawah 👇</p>
+
+        <div id="emptyState" class="empty-state">
+
+            <div class="welcome-icon">
+                ✨
+            </div>
+
+            <h2>Halo 👋</h2>
+
+            <p>
+                Saya siap membantu menjawab pertanyaan kamu.
+                Mulai percakapan sekarang.
+            </p>
+
+        </div>
+
+
+        <!-- contoh chat -->
+
+        <!--
+        <div class="message ai">
+            <div class="avatar">
+                🤖
+            </div>
+            <div class="bubble">
+                Halo, ada yang bisa saya bantu?
+            </div>
+        </div>
+
+
+        <div class="message user">
+
+            <div class="bubble">
+                Jelaskan AI
+            </div>
+
+            <div class="avatar">
+                👤
+            </div>
+
+        </div>
+        -->
+
+
     </div>
 
+
     <form id="chatForm" class="chat-form">
-      <input
+
+
+        <input
         id="chatInput"
         type="text"
-        placeholder="Tulis pesan..."
+        placeholder="Ketik pesan kamu..."
         autocomplete="off"
-      />
-      <button id="sendBtn" type="submit">Kirim</button>
-    </form>
-  </main>
+        >
 
-  <script src="script.js"></script>
+
+        <button id="sendBtn" type="submit">
+
+            <span>Kirim</span>
+            🚀
+
+        </button>
+
+
+    </form>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
