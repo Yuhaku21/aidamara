@@ -2,7 +2,7 @@
   "nama_perusahaan": "PT BPR DAMARA",
   "jam_kerja": {
     "senin_jumat": "08:00 - 17:00",
-    "sabtu": "08:00 - 12:00",
+    "sabtu": "Libur",
     "minggu": "Libur",
     "jam_istirahat": "12:00 - 13:00"
   },
