@@ -1,0 +1,27 @@
+{
+  "nama_perusahaan": "PT Contoh Sejahtera",
+  "jam_kerja": {
+    "senin_jumat": "08:00 - 17:00",
+    "sabtu": "08:00 - 12:00",
+    "minggu": "Libur",
+    "jam_istirahat": "12:00 - 13:00"
+  },
+  "struktur_jabatan": [
+    { "posisi": "Direktur Utama", "nama": "Nama Direktur", "atasan": null },
+    { "posisi": "Manajer Operasional", "nama": "Nama Manajer", "atasan": "Direktur Utama" },
+    { "posisi": "Manajer Produk", "nama": "Nama Manajer Produk", "atasan": "Direktur Utama" },
+    { "posisi": "Staff Operasional", "nama": "Nama Staff", "atasan": "Manajer Operasional" }
+  ],
+  "produk": [
+    {
+      "nama": "Produk A",
+      "deskripsi": "Deskripsi singkat produk A",
+      "harga": "Rp 100.000"
+    },
+    {
+      "nama": "Produk B",
+      "deskripsi": "Deskripsi singkat produk B",
+      "harga": "Rp 250.000"
+    }
+  ]
+}

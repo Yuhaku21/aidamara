@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>AI Chat</h1>
+    </header>
+
+    <div id="chatBox" class="chat-box">
+      <p id="emptyState" class="empty-state">Mulai percakapan dengan mengetik pesan di bawah 👇</p>
+    </div>
+
+    <form id="chatForm" class="chat-form">
+      <input
+        id="chatInput"
+        type="text"
+        placeholder="Tulis pesan..."
+        autocomplete="off"
+      />
+      <button id="sendBtn" type="submit">Kirim</button>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
