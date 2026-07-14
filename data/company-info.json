@@ -7,7 +7,7 @@
     "jam_istirahat": "12:00 - 13:00"
   },
   "struktur_jabatan": [
-    { "posisi": "Direktur Utama", "nama": "Nama Direktur", "atasan": null },
+    { "posisi": "Direktur Utama", "nama": "Abdurra'uf", "atasan": null },
     { "posisi": "Manajer Operasional", "nama": "Nama Manajer", "atasan": "Direktur Utama" },
     { "posisi": "Manajer Produk", "nama": "Nama Manajer Produk", "atasan": "Direktur Utama" },
     { "posisi": "Staff Operasional", "nama": "Nama Staff", "atasan": "Manajer Operasional" }
