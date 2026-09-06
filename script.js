@@ -7,6 +7,24 @@ const emptyState = document.getElementById("emptyState");
 let messages = [];
 let loading = false;
 
+function getReplyText(reply) {
+  if (typeof reply === "string") return reply;
+
+  if (Array.isArray(reply)) {
+    return reply
+      .map((part) => getReplyText(part))
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  if (reply && typeof reply === "object") {
+    return getReplyText(reply.content ?? reply.text ?? reply.value);
+  }
+
+  return "Maaf, server mengirim jawaban dengan format yang tidak dikenal.";
+}
+
+
 function addBubble(role, text) {
   const row = document.createElement("div");
   row.className = `bubble-row ${role}`;
@@ -62,8 +80,9 @@ chatForm.addEventListener("submit", async (e) => {
     if (!res.ok) {
       showError(data.error || "Terjadi kesalahan.");
     } else {
-      messages.push({ role: "assistant", content: data.reply });
-      addBubble("assistant", data.reply);
+      const reply = getReplyText(data.reply);
+      messages.push({ role: "assistant", content: reply });
+      addBubble("assistant", reply);
     }
   } catch (err) {
     typingRow.remove();

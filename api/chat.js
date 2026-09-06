@@ -82,7 +82,6 @@ async function getWebsiteInfo() {
             "Halaman tidak ditemukan:",
             url
           );
-
           continue;
 
         }
@@ -407,13 +406,16 @@ Gunakan bahasa Indonesia yang sopan dan ramah.
 
 
 
+    const reply = data?.choices?.[0]?.message?.content;
+
+    if(typeof reply !== "string"){
+      return res.status(502).json({
+        error: "Format jawaban dari layanan AI tidak valid."
+      });
+    }
+
     return res.status(200).json({
-
-
-      reply:
-      data.choices[0].message.content
-
-
+      reply
     });
 
 
